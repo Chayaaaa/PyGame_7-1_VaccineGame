@@ -8,6 +8,9 @@ w = 80
 h = 600
 g = 250
 
+WALL_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "renga_pattern.png")),(h,w)) #增
+WALL_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "renga_pattern2.png")),(w,h)) #增
+
 class Wall(GameObject):
     def __init__(self, master, position):
         super().__init__(master)
@@ -21,9 +24,9 @@ class Wall(GameObject):
     
     def repaint(self, screen, position):
         x, y = super().repaint(screen, position)
-        pygame.draw.rect(screen, self.color, (x - w/2, y - h/2, w, h))
-        pygame.draw.rect(screen, self.color, (x - h/2, y - w/2, h, w))
-
+        screen.blit(WALL_IMAGE_1,(x - h/2, y - w/2))#增
+        screen.blit(WALL_IMAGE_2,(x - w/2, y - h/2))#增
+        
     def touch(self, person):
         for r in self.rects:
             x = min(r.x+r.w, person.x)
